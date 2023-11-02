@@ -12,3 +12,8 @@
 .catalog .book img {
   max-width: 100px;
 }
+
+.registration-modal {
+  background-color: #282c34;
+  color: white
+}
