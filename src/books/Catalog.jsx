@@ -35,17 +35,47 @@ const CatalogBook = ({book}) => {
 }
 
 const RegistrationModal = ({book, isOpen, onClose}) => {
+  const bookTitle = book.title || 'Unknown'
+  const authors = (book.authors || []).join(", ")
+  const image = book.imageLinks?.thumbnail || DEFAULT_IMAGE
   return (
     <ReactModal
       isOpen={isOpen}
       className="registration-modal"
+      overlayClassName="registration-modal-overlay"
       shouldCloseOnEsc={true}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={false}
     >
-      <h1>Registration</h1>
-      <p>You are interested in purchasing "<span style={{fontWeight: 'bold'}}>{book.title || 'Unknown'}</span>".</p>
-      <input type="text"/>
+      <h1>Purchase Form</h1>
+      <span class="close" onClick={onClose}>&#x2717;</span>
+      
+      <h3><span style={{backgroundColor: '#555555'}}>{bookTitle}</span> by {authors}</h3>
+      <h4>{book.subtitle}</h4>
+      <section id="purchase-form">
+        <div>
+          <img src={image} alt=""/>
+        </div>
+
+        <form onSubmit={() => {}}>
+          <label for="name">
+            Name
+            <input type="text" name="name"/>
+          </label>
+          <label for="phone-number">
+            Phone Number
+            <input type="phone-number" name="phone-numer"/>
+          </label>
+          <label for="email">
+            Email
+            <input type="email" name="email"/>
+          </label>
+          <label for="address">
+            Address
+            <input type="text" name="address"/>
+          </label>
+        </form>
+      </section>
     </ReactModal>
 )}
 

@@ -13,7 +13,42 @@
   max-width: 100px;
 }
 
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: 2.5rem;
+}
+.close:hover {
+  cursor: pointer;
+}
+
 .registration-modal {
   background-color: #282c34;
-  color: white
+  color: white;
+  padding: 1rem;
+}
+
+.registration-modal-overlay {
+  position: absolute;
+  left: calc(50% - 25vw);
+  top: calc(50% - 25vh); 
+  height: 50vh;
+  width: 50vw;
+  background-color: #282c34;
+  color: white;
+  border: 2px solid white;
+  padding: 1rem;
+}
+
+#purchase-form {
+  display: flex;
+}
+#purchase-form form {
+  width: 10rem;
+  margin-left: 2rem;
+}
+#purchase-form label input {
+  margin-bottom: 1rem;
 }
