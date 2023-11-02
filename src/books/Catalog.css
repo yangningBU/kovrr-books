@@ -1,10 +1,8 @@
 .catalog {
-  min-width: 10vw;
-  max-width: 50vw;
   display: flex;
   align-items: flex-end;
-  font-size: calc(10px + 2vmin);
   color: white;
+  overflow-y: scroll;
 }
 
 .book {
