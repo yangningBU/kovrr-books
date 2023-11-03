@@ -10,13 +10,12 @@ const PurchaseForm = ({book, closeModal}) => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   console.log(errors)
-  
   return (
     <>
       <h1>Purchase Form</h1>
       <span className="close" onClick={closeModal}>&#x2717;</span>
       
-      <h3><span style={{backgroundColor: '#555555'}}>{bookTitle}</span></h3>
+      <h3>{bookTitle}</h3>
       <h4>{book.subtitle}</h4>
       <h4>by {authors}</h4>
       <section id="purchase-form">
@@ -26,8 +25,8 @@ const PurchaseForm = ({book, closeModal}) => {
 
         <form onSubmit={handleSubmit((data) => {
           if (!!errors) {
-            console.log("Purchase Data Sheet", data)
             closeModal()
+            alert("Purchase order sent!")
           }
         })}>
           <label htmlFor="name">
@@ -42,7 +41,7 @@ const PurchaseForm = ({book, closeModal}) => {
                 }
               )}/>
           </label>
-          <p>{errors.name?.message}</p>
+          <p className='errors'>{errors.name?.message}</p>
           <label htmlFor="phone-number">
             Phone Number
             <input
@@ -50,13 +49,13 @@ const PurchaseForm = ({book, closeModal}) => {
               {...register(
                 "phone-number",
                 {
-                  pattern: "[0-9]{10}",
+                  pattern: /^[0-9]{10}/,
                   required: "Please enter 10 digit phone number"
                 }
               )}
             />
           </label>
-          <p>{errors['phone-number']?.message}</p>
+          <p className='errors'>{errors['phone-number']?.message}</p>
           <label htmlFor="email">
             Email
             <input
@@ -71,7 +70,7 @@ const PurchaseForm = ({book, closeModal}) => {
               }
             />
           </label>
-          <p>{errors.email?.message}</p>
+          <p className='errors'>{errors.email?.message}</p>
           <label htmlFor="address">
             Address
             <input
@@ -85,7 +84,7 @@ const PurchaseForm = ({book, closeModal}) => {
               )}
             />
           </label>
-          <p>{errors.address?.message}</p>
+          <p className='errors'>{errors.address?.message}</p>
           <button type="submit">Purchase</button>
         </form>
       </section>
@@ -97,8 +96,8 @@ const PurchaseFormModal = ({book, isOpen, onClose}) => {
   return (
     <ReactModal
       isOpen={isOpen}
-      className="registration-modal"
-      overlayClassName="registration-modal-overlay"
+      className="purchase-form-modal"
+      overlayClassName="purchase-form-modal-overlay"
       shouldCloseOnEsc={true}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={false}
