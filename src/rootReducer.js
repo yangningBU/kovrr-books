@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import catalogReducer from "./books/catalogReducer";
+import catalogReducer from "./catalog/catalogReducer";
 
 const rootReducer = combineReducers({
   books: catalogReducer

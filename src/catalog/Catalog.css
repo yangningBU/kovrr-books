@@ -1,12 +1,30 @@
 .catalog {
   display: flex;
   align-items: flex-end;
+  position: relative;
   color: white;
-  overflow-y: scroll;
+  overflow: scroll;
+  width: calc(100% - 100px);
+  margin: 0 auto;
 }
 
 .book {
   margin: 1rem;
+}
+
+.arrow {
+  position: absolute;
+  top: 80%;
+  font-size: 3rem;
+}
+.arrow:hover {
+  cursor: pointer;
+}
+#leftArrow {
+  left: 15px;
+}
+#rightArrow {
+  right: 15px;
 }
 
 .catalog .book img {
