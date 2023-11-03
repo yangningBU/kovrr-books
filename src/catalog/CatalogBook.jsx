@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import PurchaseFormModal from './PurchaseFormModal'
+import PurchaseFormModal from '../purchase/PurchaseFormModal'
 import { DEFAULT_IMAGE } from '../constants'
 
 const CatalogBook = ({book}) => {
