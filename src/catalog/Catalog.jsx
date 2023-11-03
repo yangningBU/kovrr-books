@@ -17,7 +17,9 @@ const Catalog = () => {
   const dispatch = useDispatch()
   const [maxResultCount, setMaxResultCount] = useState(DEFAULT_MAX_RESULT_COUNT)
   /* FIXME: extract to method */
-  const [offset, setOffset] = useState(0)
+  const [pageIndex, setPageIndex] = useState(0)
+  const offset = pageIndex * maxResultCount
+  const showPrevious = pageIndex > 0
 
   /* FIXME: LOADING LOGIC */
   dispatch({type: LOAD_START})
@@ -28,26 +30,36 @@ const Catalog = () => {
         payload: apiBooks
       }))
       .catch(error => dispatch({type: LOAD_ERROR}))
-  }, [dispatch, maxResultCount])
+  }, [dispatch, maxResultCount, offset])
 
   return (
     <div id="catalogWrapper">
-      <h1 style={{textAlign: 'left', paddingLeft: '1rem'}}>Catalog:</h1>
-      <div>
-        <h3>Result Size: {maxResultCount}</h3>
-        <button onClick={() => setMaxResultCount(10)}>10</button>
-        <button onClick={() => setMaxResultCount(25)}>25</button>
-        <button onClick={() => setMaxResultCount(40)}>40</button>
+      <h1>Catalog</h1>
+      <div className="controls">
+        <span>Result Size: </span>
+        <button
+          onClick={() => setMaxResultCount(10)}
+          className={maxResultCount === 10 ? 'selected' : undefined}
+        >10</button>
+        <button
+          onClick={() => setMaxResultCount(25)}
+          className={maxResultCount === 25 ? 'selected' : undefined}
+        >25</button>
+        <button
+          onClick={() => setMaxResultCount(40)}
+          className={maxResultCount === 40 ? 'selected' : undefined}
+        >40</button>
       </div>
-      <span className="arrow" id="leftArrow">
-        <i className="fa-solid fa-arrow-left"></i>
-      </span>
-      <div className="catalog">
-        {books.map(book => <CatalogBook book={book} key={book.id}/>)}
+      <div className="controls">
+        <button onClick={() => setPageIndex(pageIndex - 1)} disabled={!showPrevious}>Prev</button>
+        <span>Page {pageIndex + 1}</span>
+        <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
       </div>
-      <span className="arrow" id="rightArrow">
-        <i className="fa-solid fa-arrow-right"></i>
-      </span>
+      <div id="scroll">
+        <div className="catalog">
+          {books.map(book => <CatalogBook book={book} key={book.id}/>)}
+        </div>
+      </div>
     </div>
   )
 }

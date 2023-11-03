@@ -4,31 +4,43 @@
   position: relative;
   color: white;
   overflow: scroll;
-  width: calc(100% - 100px);
+  width: 100%;
   margin: 0 auto;
 }
+.catalog img {
+  max-width: 100px;
+}
 
-.book {
-  margin: 1rem;
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.controls span {
+  font-size: 1.17rem;
+  margin: 0 1rem;
+}
+.controls button.selected {
+  color: #d51917;
+}
+
+#scroll {
+  position: relative;
 }
 
 .arrow {
   position: absolute;
-  top: 80%;
+  top: 50%;
   font-size: 3rem;
 }
 .arrow:hover {
   cursor: pointer;
 }
 #leftArrow {
-  left: 15px;
+  left: 0;
 }
 #rightArrow {
-  right: 15px;
-}
-
-.catalog .book img {
-  max-width: 100px;
+  right: 0;
 }
 
 .close {

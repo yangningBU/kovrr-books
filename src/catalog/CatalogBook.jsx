@@ -9,7 +9,11 @@ const CatalogBook = ({book}) => {
   const image = book.volumeInfo.imageLinks?.thumbnail || DEFAULT_IMAGE
   return (
     <>
-      <div className="book" key={book.id} onClick={() => setIsModalOpen(true)}>
+      <div
+        key={book.id}
+        style={{margin: '1rem'}}
+        onClick={() => setIsModalOpen(true)}
+      >
         <p>{bookTitle}</p>
         <img src={image} alt=""/>
       </div>
