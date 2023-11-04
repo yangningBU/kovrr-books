@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import SearchBar from "./SearchBar";
+
 import {
   DEFAULT_MAX_RESULT_COUNT,
   SET_BOOKS,
@@ -20,16 +22,18 @@ const Catalog = () => {
   const offset = pageIndex * maxResultCount
   const showPrevious = pageIndex > 0
 
+  const [searchTerm, setSearchTerm] = useState('')
+
   /* FIXME: LOADING LOGIC */
-  dispatch({type: LOAD_START})
   useEffect(() => {
-    fetchBooks({maxResults: maxResultCount, offset})
+    dispatch({type: LOAD_START})
+    fetchBooks({maxResults: maxResultCount, offset, searchTerm})
       .then(apiBooks => dispatch({
         type: SET_BOOKS,
         payload: apiBooks
       }))
       .catch(error => dispatch({type: LOAD_ERROR}))
-  }, [dispatch, maxResultCount, offset])
+  }, [dispatch, maxResultCount, offset, searchTerm])
 
   const MaxResult = ({count = 10}) => (
     <button
@@ -53,7 +57,10 @@ const Catalog = () => {
         <button onClick={() => setPageIndex(pageIndex - 1)} disabled={!showPrevious}>Prev</button>
         <span>Page {pageIndex + 1}</span>
         <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
-      </div> 
+      </div>
+
+      <SearchBar search={searchTerm} handleChange={setSearchTerm} />
+
       <div id="scroll">
         <div className="catalog">
           {books.map(book => <CatalogBook book={book} key={book.id}/>)}
