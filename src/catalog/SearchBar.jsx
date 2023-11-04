@@ -5,7 +5,11 @@ const SearchBar = ({search, handleChange}) => {
     handleChange(newValue)
   }
   return (
-    <input type="text" onChange={onChange} value={search}/>
+    <input
+      type="text"
+      onChange={onChange} value={search}
+      style={{width: '10rem'}}
+    />
   )
 }
 
