@@ -5,11 +5,10 @@ import { DEFAULT_IMAGE } from "../constants"
 
 const PurchaseForm = ({book, closeModal}) => {
   const bookTitle = book.title || 'Unknown'
-  const authors = (book.authors || []).join(", ")
+  const authors = (book.authors || []).join(', ')
   const image = book.imageLinks?.thumbnail || DEFAULT_IMAGE
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  console.log(errors)
   return (
     <>
       <h1>Purchase Form</h1>
@@ -35,13 +34,10 @@ const PurchaseForm = ({book, closeModal}) => {
               type="text"
               {...register(
                 "name",
-                {
-                  required: 'Name must be at least 5 characters long',
-                  minLength: 5
-                }
+                { required: true, minLength: 5 }
               )}/>
           </label>
-          <p className='errors'>{errors.name?.message}</p>
+          <p className='errors'>{!!errors.name && 'Name must be at least 5 characters long'}</p>
           <label htmlFor="phone-number">
             Phone Number
             <input
@@ -50,12 +46,12 @@ const PurchaseForm = ({book, closeModal}) => {
                 "phone-number",
                 {
                   pattern: /^[0-9]{10}/,
-                  required: "Please enter 10 digit phone number"
+                  required: true
                 }
               )}
             />
           </label>
-          <p className='errors'>{errors['phone-number']?.message}</p>
+          <p className='errors'>{!!errors['phone-number'] && "Please enter 10 digit phone number"}</p>
           <label htmlFor="email">
             Email
             <input
@@ -78,13 +74,13 @@ const PurchaseForm = ({book, closeModal}) => {
               {...register(
                 "address",
                 {
-                  required: 'Must be at least 10 characters long',
+                  required: true,
                   minLength: 10
                 }
               )}
             />
           </label>
-          <p className='errors'>{errors.address?.message}</p>
+          <p className='errors'>{!!errors.address && 'Must be at least 10 characters long'}</p>
           <button type="submit">Purchase</button>
         </form>
       </section>
