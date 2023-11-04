@@ -24,23 +24,13 @@
   color: #d51917;
 }
 
-#scroll {
-  position: relative;
+#search-bar input {
+  width: 10rem;
+  margin-right: .5rem;
 }
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  font-size: 3rem;
-}
-.arrow:hover {
-  cursor: pointer;
-}
-#leftArrow {
-  left: 0;
-}
-#rightArrow {
-  right: 0;
+#scroll {
+  position: relative;
 }
 
 .close {

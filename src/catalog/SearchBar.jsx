@@ -5,11 +5,10 @@ const SearchBar = ({search, handleChange}) => {
     handleChange(newValue)
   }
   return (
-    <input
-      type="text"
-      onChange={onChange} value={search}
-      style={{width: '10rem'}}
-    />
+    <div id="search-bar">
+      <input type="text" onChange={onChange} value={search} />
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
   )
 }
 
