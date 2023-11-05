@@ -24,17 +24,15 @@ const Catalog = () => {
   const showPrevious = pageIndex > 0
 
   const [searchTerm, setSearchTerm] = useState('')
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000)
+  const debouncedSearchTerm = useDebounce(searchTerm, 800)
 
-  /* FIXME: LOADING LOGIC */
   useEffect(() => {
-    dispatch({type: LOAD_START})
     fetchBooks({maxResults: maxResultCount, offset, searchTerm})
       .then(apiBooks => dispatch({
         type: SET_BOOKS,
         payload: apiBooks
       }))
-      .catch(error => dispatch({type: LOAD_ERROR}))
+      .catch(error => console.log(error))
   }, [dispatch, maxResultCount, offset, debouncedSearchTerm])
 
   const MaxResult = ({count = 10}) => (
