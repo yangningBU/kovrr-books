@@ -52,9 +52,9 @@
 
 .purchase-form-modal-overlay {
   position: absolute;
-  left: calc(50% - 25vw);
+  left: calc(50% - 200px);
   top: 10%; 
-  width: 50vw;
+  width: fit-content;
   background-color: #282c34;
   color: white;
   border: 2px solid white;
