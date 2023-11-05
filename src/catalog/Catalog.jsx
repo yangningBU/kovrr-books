@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   DEFAULT_MAX_RESULT_COUNT,
-  SET_BOOKS,
-  LOAD_ERROR,
-  LOAD_START
+  SET_BOOKS
 } from "../constants";
 import fetchBooks from '../api/fetchBooks';
 import CatalogBook from "./CatalogBook";
@@ -27,7 +25,11 @@ const Catalog = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 800)
 
   useEffect(() => {
-    fetchBooks({maxResults: maxResultCount, offset, searchTerm})
+    fetchBooks({
+        maxResults: maxResultCount,
+        offset,
+        searchTerm: debouncedSearchTerm
+      })
       .then(apiBooks => dispatch({
         type: SET_BOOKS,
         payload: apiBooks
@@ -44,7 +46,6 @@ const Catalog = () => {
 
   return (
     <div id="catalogWrapper">
-      <h1>Catalog</h1>
       <div className="controls">
         <span>Result Size: </span>
         <MaxResult count={10} />
@@ -56,7 +57,7 @@ const Catalog = () => {
         <span>Page {pageIndex + 1}</span>
         <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
       </div>
-
+      <br/>
       <SearchBar search={searchTerm} handleChange={setSearchTerm} />
 
       <div id="scroll">

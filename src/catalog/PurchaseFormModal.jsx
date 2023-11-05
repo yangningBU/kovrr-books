@@ -1,13 +1,20 @@
 import ReactModal from 'react-modal';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
-import { DEFAULT_IMAGE } from "../constants"
+import { ADD_TO_CART, DEFAULT_IMAGE } from "../constants"
 
 const PurchaseForm = ({book, closeModal}) => {
   const bookTitle = book.title || 'Unknown'
   const authors = (book.authors || []).join(', ')
   const image = book.imageLinks?.thumbnail || DEFAULT_IMAGE
   const { register, handleSubmit, formState: { errors } } = useForm()
+  
+  const dispatch = useDispatch()
+  const addToCart = ({book}) => dispatch({
+    type: ADD_TO_CART,
+    payload: book
+  })
 
   return (
     <>
@@ -82,6 +89,10 @@ const PurchaseForm = ({book, closeModal}) => {
           </label>
           <p className='errors'>{!!errors.address && 'Must be at least 10 characters long'}</p>
           <button type="submit">Purchase</button>
+          <button onClick={() => {
+            addToCart({book})
+            closeModal()
+          }}>Add to Cart</button>
         </form>
       </section>
     </>

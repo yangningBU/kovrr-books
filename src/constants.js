@@ -3,5 +3,6 @@ export const DEFAULT_IMAGE = "https://images.placeholders.dev/?width=125&height=
 export const DEFAULT_MAX_RESULT_COUNT = 10
 
 export const SET_BOOKS = 'SET_BOOKS'
-export const LOAD_ERROR = 'LOAD_ERROR'
-export const LOAD_START = 'LOAD_START'
+
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'

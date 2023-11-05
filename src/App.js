@@ -1,3 +1,4 @@
+import Cart from './cart/Cart';
 import Catalog from './catalog/Catalog';
 import './App.css';
 
@@ -7,6 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Kovrr <i className="fa-book-open-reader fa-classic"></i> Books</h1>
       </header>
+      <Cart />
       <main>
         <Catalog />
       </main>

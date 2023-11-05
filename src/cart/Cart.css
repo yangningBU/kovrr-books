@@ -1,0 +1,22 @@
+#cart-button {
+  position: absolute;
+  top: 3.67rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  padding: .25rem;
+}
+#cart-button span {
+  margin-right: 0.25rem;
+}
+
+.cart-book {
+  display: flex;
+  flex-direction: column;
+}
+.cart-book img {
+  max-width: 150px;
+  margin-bottom: 1rem;
+}
+.cart-book button {
+  max-width: 150px;
+}
