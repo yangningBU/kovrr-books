@@ -5,7 +5,7 @@ import ReactModal from 'react-modal'
 import { DEFAULT_IMAGE, REMOVE_FROM_CART } from '../constants'
 import './Cart.css'
 
-const CartButton = () => {
+const Cart = () => {
   const cartItems = useSelector(state => state.cart)
   const count = cartItems.length
 
@@ -55,4 +55,4 @@ const CartButton = () => {
   </>
 }
 
-export default CartButton
+export default Cart
