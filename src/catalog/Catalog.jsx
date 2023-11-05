@@ -1,7 +1,6 @@
+import { useDebounce } from "@uidotdev/usehooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import SearchBar from "./SearchBar";
 
 import {
   DEFAULT_MAX_RESULT_COUNT,
@@ -11,6 +10,8 @@ import {
 } from "../constants";
 import fetchBooks from '../api/fetchBooks';
 import CatalogBook from "./CatalogBook";
+import SearchBar from "./SearchBar";
+
 import './Catalog.css';
 
 const Catalog = () => {
@@ -23,6 +24,7 @@ const Catalog = () => {
   const showPrevious = pageIndex > 0
 
   const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000)
 
   /* FIXME: LOADING LOGIC */
   useEffect(() => {
@@ -33,15 +35,13 @@ const Catalog = () => {
         payload: apiBooks
       }))
       .catch(error => dispatch({type: LOAD_ERROR}))
-  }, [dispatch, maxResultCount, offset, searchTerm])
+  }, [dispatch, maxResultCount, offset, debouncedSearchTerm])
 
   const MaxResult = ({count = 10}) => (
     <button
       onClick={() => setMaxResultCount(count)}
       className={maxResultCount === count ? 'selected' : undefined}
-    >
-      {count}
-    </button>
+    >{count}</button>
   )
 
   return (
