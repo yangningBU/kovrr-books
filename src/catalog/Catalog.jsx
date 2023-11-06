@@ -26,15 +26,15 @@ const Catalog = () => {
 
   useEffect(() => {
     fetchBooks({
-        maxResults: maxResultCount,
-        offset,
-        searchTerm: debouncedSearchTerm
-      })
-      .then(apiBooks => dispatch({
-        type: SET_BOOKS,
-        payload: apiBooks
-      }))
-      .catch(error => console.log(error))
+      maxResults: maxResultCount,
+      offset,
+      searchTerm: debouncedSearchTerm
+    })
+    .then(apiBooks => dispatch({
+      type: SET_BOOKS,
+      payload: apiBooks
+    }))
+    .catch(error => console.log(error))
   }, [dispatch, maxResultCount, offset, debouncedSearchTerm])
 
   const MaxResult = ({count = 10}) => (
@@ -50,7 +50,7 @@ const Catalog = () => {
         <span>Result Size: </span>
         <MaxResult count={10} />
         <MaxResult count={25} />
-        <MaxResult count={40} />
+        <MaxResult count={50} />
       </div>
       <div className="controls">
         <button onClick={() => setPageIndex(pageIndex - 1)} disabled={!showPrevious}>Prev</button>
@@ -62,7 +62,7 @@ const Catalog = () => {
 
       <div id="scroll">
         <div className="catalog">
-          {books.map(book => <CatalogBook book={book} key={book.id}/>)}
+          {books.map((book, idx) => <CatalogBook book={book} key={`${idx}-${book.id}`}/>)}
         </div>
       </div>
     </div>
