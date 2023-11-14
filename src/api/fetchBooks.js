@@ -4,7 +4,7 @@ const DEFAULT_RESULT_LIMIT = 10
 const DEFAULT_OFFSET = 0
 
 const fetchBooks = async ({pageSize, pageIndex, searchTerm}) => {
-  const search = `?q=cyber${' ' + searchTerm || ''}`
+  const search = `?q=cyber${searchTerm ? ' ' + searchTerm : ''}`
   const iterationParameters = determineFetchParameters({pageSize, pageIndex})
   let allResults = []
   const allFetches = iterationParameters.map(iteration => {
