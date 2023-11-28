@@ -18,7 +18,6 @@ const Catalog = () => {
   const dispatch = useDispatch()
   const [maxResultCount, setMaxResultCount] = useState(DEFAULT_MAX_RESULT_COUNT)
   const [pageIndex, setPageIndex] = useState(0)
-  const offset = pageIndex * maxResultCount
   const showPrevious = pageIndex > 0
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -26,8 +25,8 @@ const Catalog = () => {
 
   useEffect(() => {
     fetchBooks({
-      maxResults: maxResultCount,
-      offset,
+      pageSize: maxResultCount,
+      pageIndex,
       searchTerm: debouncedSearchTerm
     })
     .then(apiBooks => dispatch({
@@ -35,7 +34,7 @@ const Catalog = () => {
       payload: apiBooks
     }))
     .catch(error => console.log(error))
-  }, [dispatch, maxResultCount, offset, debouncedSearchTerm])
+  }, [dispatch, maxResultCount, pageIndex, debouncedSearchTerm])
 
   const MaxResult = ({count = 10}) => (
     <button
@@ -51,6 +50,8 @@ const Catalog = () => {
         <MaxResult count={10} />
         <MaxResult count={25} />
         <MaxResult count={50} />
+        <MaxResult count={75} />
+        <MaxResult count={125} />
       </div>
       <div className="controls">
         <button onClick={() => setPageIndex(pageIndex - 1)} disabled={!showPrevious}>Prev</button>
